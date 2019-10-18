@@ -1,0 +1,71 @@
+class node:
+    def __init__(self,data,power,pnext):
+        self.data=data
+        self.power=power
+        self.pnext=pnext
+
+def show(phead):
+    p=node(0,0,None)
+    p=phead.pnext
+    while(p):
+        print(p.data,"x的",p.power,"次方")
+        p=p.pnext
+    return 0
+
+def addnoed(phead,pnode):
+        if (pnode==None) or (pnode.pnext):
+            print("插入节点不对")
+            return 0
+        p=node(0,0,None)
+        p=phead
+        while p.pnext:
+            p=p.pnext
+            if(p.power==pnode.power):
+                p.data=p.data+pnode.data
+                return 1      
+        p.pnext=pnode
+        return 1
+def exchange(p,q):
+    key=0
+    key=p
+    p=q
+    q=key
+    print(q,p,"交换成功")
+exchange(1,2)
+def sortbypower(phead):
+    key=0
+    p=node(0,0,None)
+    p=phead.pnext
+    while p.pnext:
+        q=p
+        while q.pnext:
+            if (q.power)>(p.power):
+                print("交换",p.data,"and",q.data)
+                key=p.power
+                p.power=q.power
+                q.power=key
+
+                key=p.data
+                p.data=q.data
+                q.data=key
+                
+            q=q.pnext
+        p=p.pnext
+    return 1
+head=node(0,0,None)
+add1=node(3,4,None)
+add2=node(5,7,None)
+add3=node(6,2,None)
+add4=node(4,1,None)
+add6=node(2,0,None)
+add5=node(3,2,None)
+add7=None
+addnoed(head,add1)
+addnoed(head,add2)
+addnoed(head,add3)
+addnoed(head,add4)
+addnoed(head,add5)
+addnoed(head,add6)
+show(head)
+sortbypower(head)
+show(head)
