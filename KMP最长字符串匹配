@@ -1,0 +1,47 @@
+#求数组next
+def GetNext(p):
+    plan=len(p)
+    next=[]
+    for j in range(0,plan):
+        next.append(0)
+    next[0]=-1
+    #k表示前缀部分，j表示后缀部分
+    k=-1
+    j=0
+    while(j<plan-1):
+        #k=-1表示起始位置时，设置第0，1号位置的值
+        #如果p[j]==p[k],表示匹配成功，为next[j]赋值
+        if(k==-1)or(p[j]==p[k]):
+            k+=1
+            j+=1
+            next[j]=k
+        else:
+            #如果p[j]和p[k]不匹配，k往前找匹配，依次向前
+            # 如果k到了初始值-1还没有找到匹配，那就将next[j]初始化为0
+            k=next[k]
+    return next
+def KMP(t,p):
+    target = t
+    pattern = p
+    lentarget=len(target)
+    lenpattern=len(pattern)
+    if(lentarget<lenpattern):
+        print("input error")
+        return -1
+    i = 0
+    j = 0
+    next = GetNext(pattern)
+    while((i<lentarget)and(j<lenpattern)):
+        if (j == -1)or(target[i] == pattern[j]):
+            i+=1
+            j+=1
+        else:
+            j = next[j]
+    if (j ==lenpattern):
+        for k in range((i-j),lenpattern):
+            print(pattern[k])
+        return i - j
+    else:
+        print("none")
+        return -1
+KMP("asdasdsasadsa","asd")
